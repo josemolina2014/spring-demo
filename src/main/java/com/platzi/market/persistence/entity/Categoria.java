@@ -3,6 +3,9 @@ package com.platzi.market.persistence.entity;
 import javax.persistence.*;
 import java.util.List;
 
+
+@Entity
+@Table(name = "categorias")
 public class Categoria {
 
     @Id
@@ -39,5 +42,13 @@ public class Categoria {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public List<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
     }
 }
