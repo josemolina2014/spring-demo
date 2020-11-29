@@ -8,14 +8,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequestMapping("/purchase")
+@RequestMapping("/purchases")
 public class PurchaseController {
 
     @Autowired
-    PurchaseService purchaseService;
+    private PurchaseService purchaseService;
 
     @GetMapping("/all")
     public ResponseEntity<List<Purchase>> getAll()
@@ -30,11 +29,11 @@ public class PurchaseController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
     @PostMapping("/save")
-    public ResponseEntity<Purchase> save (@RequestBody Purchase purchase){
-        return new ResponseEntity<>(purchaseService.save(purchase),HttpStatus.CREATED);
+    public ResponseEntity<Purchase> save(@RequestBody Purchase purchase) {
+        return new ResponseEntity<>(purchaseService.save(purchase), HttpStatus.CREATED);
     }
-    @RequestMapping("client/{id}")
-    public ResponseEntity<List<Purchase>> getByClient(@PathVariable("clientId")int clientId)
+    @RequestMapping("client/{clientId}")
+    public ResponseEntity<List<Purchase>> getByClient(@PathVariable("clientId") String clientId)
     {
         return purchaseService.getByClient(clientId)
                 .map(purchases -> new ResponseEntity<>(purchases, HttpStatus.OK))
